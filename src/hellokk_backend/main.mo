@@ -84,4 +84,98 @@ actor {
     };
   };
 
+  // 复合类型 tuble
+
+  type person = (Text, Text);
+  // intero matter lol
+
+  let me = ("kk", "demian");
+
+  type persons = (Text, Text, Nat);
+
+  let me = ("kk", "demian", 29);
+
+  let tub1 : (Nat) = (1); // Nat 1;
+
+  let tup2 : (add1 : Nat, add2 : Nat, add3 : Nat3) = (1, 2, 3);
+
+  // 取数据
+
+  let operat = tup2.0;
+
+  // 数组
+
+  let arr1 : [Text] = ["arrd", "Feb", "op"]; // 长度固定
+
+  let arr2 : [Text] = ["arrd", "Feb", 3];
+
+  var arr3 : [Text] = ["ki", "arr2"]; //只能改变整个数组
+
+  arr3[0] = "sub"; // error
+
+  //Arrar.tabulate 函数生成一个数组;
+  //通过索引访问
+
+  ` ` ` let array1 : [Nat] = [1, 2, 3, 4, 6, 7, 8];
+
+  let array2 : [Nat] = Array.tabulate<Nat>(
+    7,
+    func(i : Nat) : Nat {
+      if (i == 2 or i == 5) { array1[i] * i } else { array1[i] };
+    },
+  );
+  ` ` `
+
+  // records
+
+  type Student = {
+    name : Text;
+    school : Text;
+    address : Text;
+    var age : Nat; // 可变值
+  }
+
+  let student1 : Student = {
+    name : "USA";
+    school : "GST";
+    address : "Caf";
+    age : 50;
+  }
+
+  student1.age += 1; // ok
+  student1.name := "beijing university"; // 不是var 改不了
+
+  // 变体
+
+  type vari = {
+    #male : Nat;
+    #female;
+    #;
+  }
+
+  let va : vari = #male;
+
+  let va : vari = #male(1);
+
+  let va3 : vari = #female();
+
+  // option ? 匹配到这个值
+
+  type Person3 = {
+    name : Text;
+    surname : Text;
+    var age : Nat;
+    var status : Status;
+    var partner : ?Person; // optional attribute
+  };
+  // 红色*的提示
+
+  let person3 : Person3 = {
+    name = "John";
+    surname = "Doe";
+    var age = 30;
+    var status = #single;
+    var partner = null; // we can assign null when there is no partner
+  };
+
 };
