@@ -1,3 +1,5 @@
+import Array "mo:base/Array";
+
 actor {
   public func greet(name : Text) : async Text {
     return "Hello, " # name # "!";
@@ -178,4 +180,57 @@ actor {
     var partner = null; // we can assign null when there is no partner
   };
 
+  // function
+
+  public func add(x : Int, y : Int) : Int = x + y; // 默认类型
+
+  private func addNum(x : Int, y : Int) : Int = x + y;
+
+  // object
+  object counter {
+    public var count = 0;
+    public func inc() { count += 1 };
+  };
+
+  // pattern
+  func fullName({ first : Text; secod : Text; mid : Text; last : Text }) : Text {
+    first # " " # secod # " " # mid # " " # last;
+  };
+  fullName(
+    object {
+      public let first = "1";
+      public let first = "11";
+      public let mid = "2";
+      public let last = "3";
+    },
+  )
+  // actor
+
+};
+
+actor Broadcast {
+  type Receiver = actor { recv : query Text -> async Nat };
+
+  var r : [Receiver] = [];
+
+  public func register(a : Receiver) {
+    r := Array.append(r, [a]);
+  };
+
+  public func send(t : Text) : async Nat {
+    var sum = 0;
+    for (a in r.vals()) {
+      sum += await a.recv(t);
+    };
+    return sum;
+  };
+
+  // 运算符
+  let vr1 : Nat = 1;
+  let vr2 : Nat = 2;
+  var vr3 = vr1 + vr2;
+
+  if (vr1 and vr2) {
+    return vr3;
+  };
 };
